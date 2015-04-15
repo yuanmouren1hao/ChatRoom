@@ -99,6 +99,7 @@ int CSocket::Receive(int strLen)
 	} 
 	buffer=new char[strLen];
 	SetSocketError(SocketEnum::Success); 
+	int lastTime;/* 记录最后一次请求接口的时间 */
 	while(1){
 		recvCount=recv(csocket,buffer,strLen,0) ; 
 		if(recvCount>0){
@@ -114,6 +115,15 @@ int CSocket::Receive(int strLen)
 				if (buffer[0]=='\\')
 				{
 					cout<<"command line";
+					if (buffer[1]=='w'||buffer[1]=='W')
+					{
+						/* 判断当前时间 和 最后一次请求接口  的时间是否超过两个小时，如果没有，则直接返回不用请求接口 */
+						/* 如果查过两个小时，则需要重新重新请求接口返回数据，将结果保存中间结果 */
+						cout<<"weather is "<<endl;
+					}else if(buffer[1]=='q'||buffer[1]=='Q')
+					{
+						exit(0);
+					}
 				}
 				else
 				{
@@ -286,3 +296,4 @@ void CSocket::setNickname(char* name)
 	nickname = name;
 }
  
+
