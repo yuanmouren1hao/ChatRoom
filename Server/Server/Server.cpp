@@ -9,7 +9,7 @@ using namespace std;
 #include "ClientList.h"
 #include <string> 
 const int BUF_LEN=1024;
-  
+
 void recv(PVOID pt)
 {
 	CSocket* csocket=(CSocket*)pt;
@@ -20,7 +20,7 @@ void recv(PVOID pt)
 		{  
 			ClientList* list=ClientList::GetInstance(); 
 			list->printTime();
-			cout<<"User logoff: user"<<csocket->getNickname()<<"Online User Num is :"<<list->Count()-1<<endl;
+			cout<<"User logoff: user"<<csocket->getNickname()<<", Online User Num is :"<<list->Count()-1<<endl;
 			list->Remove(csocket);
 			_endthread(); //用户下线，终止接收数据线程
 		}

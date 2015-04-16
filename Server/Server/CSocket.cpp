@@ -127,7 +127,7 @@ int CSocket::Receive(int strLen)
 				}
 				else
 				{
-					printf("user%s   ",nickname);printTime();
+					printf("user%s;",nickname);printTime();
 					cout<<buffer<<endl;
 				}
 			}
