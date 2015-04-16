@@ -92,6 +92,15 @@ int CSocket::Send(char* pBuf,int len)
 	{
 		return 0;
 	}
+	/*如果是输入的命令，首先检测*/
+	if (pBuf[0]=='\\')
+	{
+		/* 如果是q则退出客户端*/
+		if (pBuf[1]=='q')
+		{
+			exit(0);
+		}
+	}
 	sendCount=send(csocket,pBuf,len,0);
 	if(sendCount<=0)
 	{
