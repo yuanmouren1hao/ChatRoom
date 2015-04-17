@@ -267,9 +267,9 @@ void CSocket::SetSocketHandle(SOCKET socket)
 
 void CSocket::printTime()
 {
-	time_t now_time;
-	now_time = time(NULL);
-	cout<<now_time<<": ";
+	SYSTEMTIME sys; 
+	GetLocalTime( &sys ); 
+	printf( "%4d/%02d/%02d %02d:%02d:%02d :",sys.wYear,sys.wMonth,sys.wDay,sys.wHour,sys.wMinute, sys.wSecond); 
 	return ;
 }
 
