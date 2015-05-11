@@ -114,7 +114,6 @@ int CSocket::Receive(int strLen)
 			}else{
 				if (buffer[0]=='\\')
 				{
-					cout<<"command line";
 					if (buffer[1]=='w'||buffer[1]=='W')
 					{
 						/* 判断当前时间 和 最后一次请求接口  的时间是否超过两个小时，如果没有，则直接返回不用请求接口 */
@@ -124,10 +123,14 @@ int CSocket::Receive(int strLen)
 					{
 						exit(0);
 					}
+					else
+					{
+						cout<<"command line";
+					}
 				}
 				else
 				{
-					printf("user%s;",nickname);printTime();
+					printTime();printf("user%s;",nickname);
 					cout<<buffer<<endl;
 				}
 			}
@@ -280,9 +283,9 @@ bool CSocket::operator==(const CSocket* socket)
 
 void CSocket::printTime()
 {
-	time_t now_time;
-	now_time = time(NULL);
-	cout<<now_time<<": ";
+	SYSTEMTIME sys; 
+	GetLocalTime( &sys ); 
+	printf( "%4d/%02d/%02d %02d:%02d:%02d :",sys.wYear,sys.wMonth,sys.wDay,sys.wHour,sys.wMinute, sys.wSecond); 
 	return ;
 }
 
